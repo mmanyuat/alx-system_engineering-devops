@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-#a Bash script that displays Best School 10 times, but for the 9th
-
+# bash to print best school 10 times and display hi on the fourth
 i=0;
 while((i<10)); do
 	if ((i==8)); then
