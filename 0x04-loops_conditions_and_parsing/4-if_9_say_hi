@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # bash to print best school 10 times and display hi on the fourth
 i=0;
-while((i<10)); do
-	if ((i==8)); then
-		echo "Best School"
-		echo "Hi"
-	else
-		echo "Best school"
-	fi
-	((i++))
+while [ $i -lt 10 ]
+do
+  if [ $i -eq 9 ]
+  then
+    echo "Hi"
+  fi
+  echo "Best School"
+  (( i++ ))
 done
