@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#loop from 1 to 10 at 4 badluck and at 8 good chance
+
+i=1;
+while((i <= 10)); do
+	if ((i == 4)); then
+		echo "bad luck"
+	elif ((i == 8)); then
+		echo "good luck"
+	else
+		echo "Best school"
+	fi
+	((i++));
+done
