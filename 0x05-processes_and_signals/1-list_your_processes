@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#printing list of directories
+
+ps axjf

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#print list containing bash words
+
+ps aux | grep bash | grep -v grep

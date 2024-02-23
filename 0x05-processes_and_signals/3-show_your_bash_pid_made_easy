@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#display process pid with bash
+while read -r pid; do
+    echo "$pid bash"
+done < <(pgrep -f bash)

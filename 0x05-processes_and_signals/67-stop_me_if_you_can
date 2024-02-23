@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#copy of higher
+pid=$(pgrep -f "7-highlander")
+kill -TERM "$pid"
