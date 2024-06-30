@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# creating and configuring a file
+
+nano ~/.ssh/config
+Host *
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+
