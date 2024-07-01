@@ -1,0 +1,16 @@
+# Commands used to fix the issue
+
+# Connect to the running container
+docker exec -it <container_id> /bin/bash
+
+# Ensure Apache is installed and running
+apt-get update
+apt-get install apache2 -y
+service apache2 start
+
+# Create a simple HTML page
+echo "Hello Holberton" > /var/www/html/index.html
+
+# Restart Apache to apply changes
+service apache2 restart
+
