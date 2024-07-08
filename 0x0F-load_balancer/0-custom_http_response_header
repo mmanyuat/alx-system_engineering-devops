@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Configures Nginx to include a custom HTTP header
+
+# Update and install Nginx if not already installed
+apt-get update
+apt-get install -y nginx
+
+# Get the hostname of the server
+HOSTNAME=$(hostname)
+
+# Configure Nginx
+CONFIG_FILE="/etc/nginx/nginx.conf"
+HEADER_CONFIG="add_header X-Served-By $HOSTNAME;"
+
+# Add the custom header to the Nginx configuration
+if ! grep -q "X-Served-By" "$CONFIG_FILE"; then
+    sed -i "/http {/a \    $HEADER_CONFIG" "$CONFIG_FILE"
+fi
+
+# Restart Nginx to apply changes
+service nginx restart
