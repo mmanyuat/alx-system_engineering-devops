@@ -1,4 +1,5 @@
 #commnds to install ufw and set some few rules on webo1 server
+#configurationfile
 sudo apt update
 sudo apt install ufw
 sudo ufw allow 22/tcp
