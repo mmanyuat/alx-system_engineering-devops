@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#installation of ignix server
+apt-get update -y
+
+# Install Nginx
+apt-get install nginx -y
+
+# Create a custom index.html
+echo "Hello World!" > /var/www/html/index.html
+
+# Restart Nginx without using systemctl
+service nginx restart
+
+# Ensure Nginx is enabled to start at boot
+update-rc.d nginx defaults
