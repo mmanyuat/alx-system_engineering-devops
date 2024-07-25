@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#this is aimed to run as another user
+if [ -z "$1" ]; then
+	echo "Usage : $0 <username>"
+	exit 1
+fi
+sudo -u "$1" whoami
