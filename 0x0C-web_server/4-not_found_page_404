@@ -1,36 +1,10 @@
 #!/usr/bin/env bash
-# Update package lists and install Nginx
-sudo apt-get update
-sudo apt-get install -y nginx
+#installing nginx and redirecting to another page
 
-# Backup the existing default Nginx configuration file
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-
-# Create the custom 404 error page
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-
-# Define the custom 404 error page in the Nginx configuration file
-sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
-    }
-}
-EOF'
-
-# Check Nginx configuration for any syntax errors
-sudo nginx -t
-
-# Restart Nginx to apply the changes
-sudo service nginx restart
-
+apt-get update -y
+apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+sh -c 'echo "Hello World!" > /var/www/index.html'
+sed -i '/listen 80 default_server/ a rewrite ^/redirect_me https://www.mbusa.com/en/vehicles/class/g-class/suv permanent;' /etc/nginx/sites-available/default
+sed -i '/listen 80 default_server/ a error_page 404 /404.html;' /etc/nginx/sites-available/default
+service nginx restart
