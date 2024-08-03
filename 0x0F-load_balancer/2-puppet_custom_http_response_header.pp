@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#configuration with puppet
+
+exec { 'http header':
+	command  => 'sudo apt-get update -y
+	sudo apt-get install nginx -y;
+	sudo sed -i "server_name_a/ add_header X-served-By HOSTNAME;" /etc/nginx/sites-available/default
+	sudo service nginx restart',
+	provider  => shell, 
