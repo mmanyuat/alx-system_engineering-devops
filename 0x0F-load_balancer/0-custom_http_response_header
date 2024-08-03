@@ -1,22 +1,30 @@
 #!/usr/bin/env bash
+#installing nginx and redirecting to another page
 
-# Configures Nginx to include a custom HTTP header
+apt-get update -y
+apt-get install nginx -y
 
-# Update and install Nginx if not already installed
-apt-get update
-apt-get install -y nginx
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+touch /var/www/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-# Get the hostname of the server
-HOSTNAME=$(hostname)
+printf %s "server {
+        listen 80;
+        listen [::]:80 default_server;
+        add_header X-served-By $HOSTNAME;
 
-# Configure Nginx
-CONFIG_FILE="/etc/nginx/nginx.conf"
-HEADER_CONFIG="add_header X-Served-By $HOSTNAME;"
+        root /etc/nginx/html;
+        index index.html index.htm;
 
-# Add the custom header to the Nginx configuration
-if ! grep -q "X-Served-By" "$CONFIG_FILE"; then
-    sed -i "/http {/a \    $HEADER_CONFIG" "$CONFIG_FILE"
-fi
-
-# Restart Nginx to apply changes
+        location /redirect_me {
+                return 301 http:cuberule.com/;
+        }
+        error_page 404 /404.html;
+        location /404 {
+                root /etc/nginx/html;
+                internal;
+        }
+}" > /etc/nginx/sites-available/default
 service nginx restart
