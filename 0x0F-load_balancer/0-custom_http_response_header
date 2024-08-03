@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-#installing nginx and redirecting to another page
-
+#configuring my web-2 server to be like my web-01 server
 apt-get update -y
 apt-get install nginx -y
 
