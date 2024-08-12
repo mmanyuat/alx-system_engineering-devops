@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-#making the fix short
+#making the fixes
 cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
 sudo service nginx restart
