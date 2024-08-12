@@ -1,16 +1,11 @@
+#!/usr/bin/env bash
 # Commands used to fix the issue
-
-# Connect to the running container
+#make the apche server returns hello world!
 docker exec -it <container_id> /bin/bash
 
 # Ensure Apache is installed and running
-apt-get update
-apt-get install apache2 -y
-service apache2 start
-
-# Create a simple HTML page
-echo "Hello Holberton" > /var/www/html/index.html
-
-# Restart Apache to apply changes
-service apache2 restart
-
+sudo apt-get update -y
+sudo apt-get install apache2 -y
+sudo /etc/init.d/apache2 start
+sudo echo "Hello Holberton" | sudo tee -a /var/www/html/index.html
+sudo /etc/init.d/apache2 restart
