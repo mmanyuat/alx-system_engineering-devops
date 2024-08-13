@@ -1,0 +1,1 @@
+This project focuses on enhancing your skills in interacting with APIs, specifically using the Reddit API. You will learn to make HTTP requests, handle JSON responses, and implement recursive functions to retrieve and process data.
