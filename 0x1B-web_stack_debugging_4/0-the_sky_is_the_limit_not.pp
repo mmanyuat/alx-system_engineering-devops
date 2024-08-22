@@ -6,3 +6,7 @@ exec { 'modify max open files limit setting':
   unless  => 'grep -q "4096" /etc/default/nginx',
 }
 
+exec {
+  command => '/etc/init.d/nginx restart',
+  path    => '/etc/init.d/',
+}
