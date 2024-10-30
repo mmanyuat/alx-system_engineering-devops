@@ -2,23 +2,34 @@
 """importing module to request and take arguments"""
 
 import requests
-import sys
+from sys import argv
+
+
+def get_employee_to_info(employee_Id):
+    """Takes an employee id and renders the todo progress"""
+    try:
+        url = "https://jsonplaceholder.typicode.com/"
+        user_data = requests.get(url + f"users/{employee_Id}")
+        user = user_data.json()
+        employee_name = user['name']
+
+        todo_list = requests.get(url + f"todo?userId={employee_Id}")
+        todos = todo_list.json()
+        total_task = len(todos)
+        task_done = [task for task in todos if task['completed']]
+        no_task_done = len(task_done)
+
+        print(f"Employee {employee_name} is done with tasks ("
+              f"{no_task_done}/{total_task}):")
+        for task in task_done:
+            print(f"/t {task[title]}")
+
+    except exception as e:
+        print(f"an error occured: {e}")
+
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
-
-    employee_id = sys.argv[1]
-    user_response = requests.get(url + "users/{}".format(employee_id))
-    user = user_response.json()
-    params = {"userId": employee_id}
-    todos_response = requests.get(url + "todos", params=params)
-    todos = todos_response.json()
-    completed = []
-    for todo in todos:
-        if todo.get("completed") is True:
-            completed.append(todo.get("title"))
-
-    print("Employee {} is done with tasks({}/{})".format(
-        user.get("name"), len(completed), len(todos)))
-    for complete in completed:
-        print("\t {}".format(complete))
+    if len(argv) != 2:
+        print("Usage: script <employee_Id>")
+    else:
+        get_employee_to_info(argv[1])
